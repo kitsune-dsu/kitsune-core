@@ -1,0 +1,88 @@
+
+Kitsune - Dynamic Updating System
+=================================
+
+Getting Started
+---------------
+
+1. Build the Kitsune runtime and compiler/transformation generator:
+
+(in Kitsune root directory)
+make
+
+2. Build tests in the test/* directories.  Most of these tests
+manually initiate an update by calling kitsune_signal_update() rather
+than having the user manually initiating the update.
+
+3. Manually initiating an update normally works as follows:
+
+Starting the initial version:
+  (kitsune root)/bin/driver (version 0).so (args)
+
+To update that process, run:
+  (kitsune root)/bin/doupd (vN PID) (version N+1).so
+
+Currently, the runtime prints the pid of the running process to
+stdout, which can be used in the call to doupd.  (Note that multiple
+calls to doupd may be needed for programs that fork, like vsftpd.)
+
+If Kitsune was built for benchmarking, then a benchmarking result
+filename is expected by driver between the shared library and its
+arguments. [We plan to streamline this later.]
+
+4. Building and updating redis (as an example):
+
+(build kitsune with threading)
+
+cd examples/redis
+make
+  - builds versions of redis from 2.0.0 -> 2.0.4
+
+../../bin/driver redis-2.0.0/redis-server.so
+  - starts the redis server under kitsune
+
+(in another terminal)
+../../bin/doupd PID redis-2.0.1/redis-server.so
+  - you can get PID from the original terminal or just use `pidof
+    driver` in place of PID in this line (assuming you aren't running
+    other things under Kitsune simultaneously)
+
+When a program is updated with Kitsune, it generates a log file that
+can be found in /tmp/ekiden/PROG.PID (where PROG is the program name
+and PID is its pid).
+
+5. Learning Kitsune: currently the tests/ are the best way to see how
+the kitsune tools work.  
+
+
+Overview of the Kitsune Repository
+----------------------------------
+
+src/ 
+   - contains the Kitsune runtime source code
+
+tools/ 
+   - contains the Kitsune compiler and transformation generator
+
+tools/ocaml-src/ 
+   - Kitsune specific code
+
+tools/ocaml-src/cil 
+   - Kitsune code linked with cil for compilation
+
+tools/ocaml-src/tools 
+   - xfgen-related code
+
+tools/ocaml-src/common 
+   - code shared between the compiler and xfgen
+
+bin/ 
+   - contains the externally used Kitsune header files and the
+     compiled library
+
+tests/ 
+   - a variety of tests ensuring correct behavior in the runtime
+     library and compilation tools.  These tests provide a good way to
+     see how the parts of the system work together, and the compilation
+     process for updating.
+

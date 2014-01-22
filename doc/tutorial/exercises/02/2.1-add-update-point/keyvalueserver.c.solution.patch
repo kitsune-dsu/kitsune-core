@@ -1,0 +1,12 @@
+=== modified file 'doc/tutorial/exercises/02/add-update-point/keyvalueserver.c'
+--- doc/tutorial/exercises/02/add-update-point/keyvalueserver.c	2012-08-29 19:43:05 +0000
++++ doc/tutorial/exercises/02/add-update-point/keyvalueserver.c	2012-09-19 20:32:16 +0000
+@@ -82,6 +82,7 @@
+   assert(server_sock > 0);
+   
+   while (1) {
++    kitsune_update("main");
+     client_sock = accept(server_sock, &client_addr, 
+                          &client_addrlen);
+     if (client_sock < 0) {
+

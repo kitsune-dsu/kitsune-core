@@ -1,0 +1,34 @@
+=== modified file 'doc/tutorial/exercises/01/build-and-run/Makefile'
+--- doc/tutorial/exercises/01/build-and-run/Makefile	2012-08-29 19:36:54 +0000
++++ doc/tutorial/exercises/01/build-and-run/Makefile	2012-09-19 20:24:04 +0000
+@@ -1,11 +1,25 @@
+-KITSUNE_PATH = ../../../../bin
++KITSUNE_PATH = ../../../../../bin
++KTCC = $(KITSUNE_PATH)/ktcc
++KTLIB = $(KITSUNE_PATH)/libkitsune.a
++
++KT_CFLAGS = -fpic -I$(KITSUNE_PATH) 
++KT_LDFLAGS = -L$(KITSUNE_PATH) -lkitsune -ldl
+ 
+ SOURCE = ex1.c
+-CFLAGS = -O2 -fomit-frame-pointer
++CFLAGS = -O2 -fomit-frame-pointer $(KT_CFLAGS)
+ 
++all: ex1 ex1.so
+ 
+ %.o: %.c
+-	$(CC) $(CFLAGS) -c $^
++	$(KTCC) $(CFLAGS) -c $^
+ 
+ ex1: ex1.o
+-	$(CC) -o $@ $^
++	$(CC) -o $@ $^ $(KT_LDFLAGS)
++
++ex1.so: ex1.o
++	$(CC) -o $@ -shared $^ $(KT_LDFLAGS)
++
++clean:
++	rm *.o || true
++	rm ex1 || true
++	rm ex1.so || true
+

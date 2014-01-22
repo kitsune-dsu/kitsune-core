@@ -1,0 +1,21 @@
+=== modified file 'doc/tutorial/exercises/02/client-update-point/keyvalueserver.c'
+--- doc/tutorial/exercises/02/client-update-point/keyvalueserver.c	2012-08-17 19:07:33 +0000
++++ doc/tutorial/exercises/02/client-update-point/keyvalueserver.c	2012-08-17 19:09:27 +0000
+@@ -50,6 +50,8 @@
+   char *command = NULL, *arg1 = NULL, *arg2 = NULL, *savptr = NULL;
+ 
+   while (1) {
++    kitsune_update("client");
++    
+     memset(line, 0, line_size);
+     recv(client, line, line_size, 0);
+ 
+@@ -92,6 +94,7 @@
+   assert(server_sock > 0);
+   
+   while (1) {
++    kitsune_update("main");
+     client_sock = accept(server_sock, &client_addr, 
+                          &client_addrlen);
+     if (client_sock < 0) {
+

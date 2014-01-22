@@ -1,0 +1,36 @@
+#!/usr/bin/python
+
+import sys
+
+def get_score(calls, function, seen):
+    score = 0
+    childcalls = calls[function]
+    score += len(childcalls)
+    for childcall in childcalls:
+        if childcall in seen:
+            return float("inf")
+        else:
+            score += get_score(calls, childcall, seen + [function])
+    return float(score)
+
+if __name__ == "__main__":
+    calls = open(sys.argv[1], "r")
+    callhash = {}
+    for line in calls:
+        lc = line.split(",")
+        function = lc[0]
+        if len(lc) == 1:
+            children = []
+        else:
+            children = lc[1].strip()
+            children = [ i for i in children.split(";") if i]
+        callhash[function] = children
+    scores = {}
+    for f in callhash.keys():
+        scores[f] = get_score(callhash, f, [])
+    sk = scores.keys()
+    sk.sort()
+    for k in sk:
+        print "%s: %f" % (k, scores[k])
+
+    

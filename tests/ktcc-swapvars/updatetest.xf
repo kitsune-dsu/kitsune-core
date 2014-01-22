@@ -1,0 +1,17 @@
+
+
+x -> other.c/foo#z
+
+main.c/y -> main.c/main#z
+
+main.c/main#z -> main#q
+
+other.c/foo#z -> other.c/y
+
+other.c/y -> foo#q
+
+foo#q -> main.c/y
+
+main#q -> x
+
+

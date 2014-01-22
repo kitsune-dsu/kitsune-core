@@ -1,0 +1,12 @@
+#!/bin/bash
+
+remote=$1
+output_path="html_output"
+
+for i in *.md
+do
+    markdown -o "$output_path/${i/md/html}" $i
+done
+
+rsync -ahzPp "./$output_path/" $remote
+

@@ -1,0 +1,32 @@
+=== modified file 'doc/tutorial/exercises/05/03-xform/v1/keyvalueserver.c'
+--- doc/tutorial/exercises/05/03-xform/v1/keyvalueserver.c	2012-09-10 19:30:58 +0000
++++ doc/tutorial/exercises/05/03-xform/v1/keyvalueserver.c	2012-09-12 21:47:36 +0000
+@@ -14,7 +14,7 @@
+ 
+ #include "tree.h"
+ 
+-struct tree * E_OPAQUE store = NULL;
++struct tree E_G([opaque]) *store = NULL;
+ int connected_clients_count = 0;
+ 
+ struct tnode {
+
+=== modified file 'doc/tutorial/exercises/05/03-xform/v1/tree.c'
+--- doc/tutorial/exercises/05/03-xform/v1/tree.c	2012-09-10 19:30:58 +0000
++++ doc/tutorial/exercises/05/03-xform/v1/tree.c	2012-09-12 21:47:21 +0000
+@@ -2,10 +2,10 @@
+ #include <assert.h>
+ 
+ struct tree {
+-  void *data;
+-  struct tree *left;
+-  struct tree *right;
+-};
++  void E_T(@t) *data;
++  struct tree E_G(@t) *left;
++  struct tree E_G(@t) *right;
++} E_GENERIC(@t);
+ 
+ static struct tree *
+ _mknode(void *n)
+

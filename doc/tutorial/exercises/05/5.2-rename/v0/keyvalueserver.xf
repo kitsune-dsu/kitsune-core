@@ -1,0 +1,3 @@
+
+
+struct hsearch_data -> struct hsearch_data: {XF_ASSIGN($out, $in);}

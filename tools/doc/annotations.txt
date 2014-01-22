@@ -1,0 +1,78 @@
+
+Until proper documentation is written, this file will describe the
+annotations used by the serialization generation tool.  Once we feel
+good that the annotations has settled, I'll write something more
+substantial. 
+
+The annotations are:
+
+    E_PTR
+    E_PTRARRAY(S)
+    E_ARRAY(S)
+    E_CUSTOM(SF,DF)
+    E_IGNORE
+    E_AUTO
+    E_RAW
+    E_SZ
+
+where you might write:
+     char * E_SZ str = ...;
+to indicate that str points to a null-terminated string.
+
+Alternatively, you could write:
+     char * E_PTR p = ...;
+to indicate that p is a pointer to a single char (this is the default,
+so if this is the intended behavior, the annotation can be left off).
+
+For a pointer to the first element of an array the following
+annotation can be used:
+     char * E_PTRARRAY(10) p = ...;
+to indicate that p points to an array of 10 chars.  
+
+Sometimes you may have more complex types, for example:
+     foo **x;
+By default, this definition is interpreted as: "a pointer to a single
+pointer to a single foo instance".  However, some of these pointers
+may actually point to arrays.  In that case, annotations can be added:
+
+1. foo * E_PTRARRAY(10) * x;
+2. foo ** E_PTRARRAY(10) x;
+3. foo * E_PTRARRAY(10) * E_PTRARRAY(20) x;
+
+meaning:
+
+1. a pointer to a pointer to the first element of an array of 10
+instances of foo
+
+2. a pointer to the first element of an array of 10 pointers to single
+instances of foo
+
+3. a pointer to the first element of an array of 20 pointers to the
+first elements of a arrays of 10 pointers to single instances of foo
+
+OTHER ANNOTATIONS:
+
+struct foo {
+   bar *w E_IGNORE;
+   bar *x E_RAW;
+   bar *y E_AUTO;
+};
+
+E_IGNORE - don't bother doing any work to transfer this field
+E_RAW - transfer this field as raw bits (is this useful? maybe not)
+E_AUTO - transfer using the default handling
+
+struct bar {
+    ....
+} E_CUSTOM(custom_bar_serialize, custom_bar_deserialize);
+
+here, the user provided functions custom_bar_serialize and
+custom_bar_deserialize will be used to for instances of bar.
+
+struct baz {
+    qux E_CUSTOM(custom_qux_serialize, custom_qux_deserialize) *x;
+};
+
+Here the user provided functions custom_qux_serialize and
+custom_qux_deserialize will be used for handling the x field in
+instances of baz.

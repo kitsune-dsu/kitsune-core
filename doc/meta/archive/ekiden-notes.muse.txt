@@ -1,0 +1,15 @@
+#title Notes on Ekiden
+
+* Overview
+
+Ekiden is a library to allow programmers to update their software via a method called state-transfer. Programmers tag state as update-necessary using Ekiden APIs, write export/import functions, and request Ekiden to update to a new version when the new version is deployed. Ekiden will then fork and exec a new update, transfer and import required state, and resume execution. 
+
+** Why State Transfer
+
+There are numerous update approaches in academia, but although these concepts and the systems that implement them have existed for a number of years, they haven't been widely used. State-transfer updating, also called by a number of colloquial names, has been used and developed mostly by groups or individuals outside academia. 
+
+Additionally, state-transfer update has the side effect of remediating any resource-leak-related bugs. Presuming the new version is properly patched after, say, a memory leak is discovered, it will not leak any more memory, and any unreachable memory that was not freed will disappear with the image of the previous version.
+* Functions
+** ekiden_update
+
+ekiden_update should be called at the beginning of your main loop. It will enter the ekiden library and check to see if an update is ready to be applied. If you have just applied an update and you are in the new process, it will initialize state marked as importable. If you have just applied an update and are in the old process, it will never return, but will wait for all remaining child processes to exit, and then exit the parent process.

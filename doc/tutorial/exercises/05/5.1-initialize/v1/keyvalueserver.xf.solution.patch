@@ -1,0 +1,11 @@
+=== modified file 'doc/tutorial/exercises/05/01-initialize/v1/keyvalueserver.xf'
+--- doc/tutorial/exercises/05/01-initialize/v1/keyvalueserver.xf	2012-08-31 21:08:26 +0000
++++ doc/tutorial/exercises/05/01-initialize/v1/keyvalueserver.xf	2012-08-31 21:08:53 +0000
+@@ -1,3 +1,6 @@
+ 
+ 
+ struct hsearch_data -> struct hsearch_data: {XF_ASSIGN($out, $in);}
++
++
++INIT connected_count: { $out = 0; }
+

@@ -1,0 +1,11 @@
+
+
+other.c/foo#z -> other.c/foo#z,
+other.c/y -> other.c/y,
+foo#q -> foo#q,
+x -> x,
+main.c/y -> main.c/y,
+main.c/main#z -> main.c/main#z,
+main#q -> main#q: {
+  $out = $in + 5;
+}

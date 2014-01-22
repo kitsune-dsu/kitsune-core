@@ -1,0 +1,10 @@
+=== modified file 'doc/tutorial/exercises/05/02-rename/v1/keyvalueserver.xf'
+--- doc/tutorial/exercises/05/02-rename/v1/keyvalueserver.xf	2012-09-10 18:42:42 +0000
++++ doc/tutorial/exercises/05/02-rename/v1/keyvalueserver.xf	2012-09-10 19:03:36 +0000
+@@ -1,2 +1,5 @@
++connected_count -> connected_clients_count
++main#client_sock -> main#client
++main#server_sock -> server
+ 
+ 
+

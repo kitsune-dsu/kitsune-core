@@ -1,0 +1,11 @@
+EKINC  = -I../../bin/
+EKLIB  = ../../bin/libkitsune.a
+CFLAGS_SHARED  = -ggdb3 -Wall -ldl -shared -fPIC -u kitsune_init_inplace
+CFLAGS = -ggdb3 -Wall -ldl -fPIC
+EKDRV = ../../bin/driver
+EKCC = ../../bin/ktcc
+EKJOIN = ../../bin/kttjoin
+EKGEN = ../../bin/xfgen
+EKCC = ../../bin/ktcc
+EKJOIN = ../../bin/kttjoin
+EKGEN = ../../bin/xfgen

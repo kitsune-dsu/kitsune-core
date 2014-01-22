@@ -1,0 +1,34 @@
+=== modified file 'doc/tutorial/exercises/04/data-migrations/keyvalueserver.c'
+--- doc/tutorial/exercises/04/data-migrations/keyvalueserver.c	2012-08-29 22:00:55 +0000
++++ doc/tutorial/exercises/04/data-migrations/keyvalueserver.c	2012-08-29 22:11:24 +0000
+@@ -82,16 +82,25 @@
+   close(client);
+ }
+ 
+-int
+-main(int argc, char **argv)
++int 
++main(int argc, char **argv) E_NOTELOCALS
+ {
+   int server_sock = 0, client_sock = 0, 
+     client_addrlen = sizeof(struct sockaddr_in);
+   struct sockaddr_in client_addr;
+ 
+-  init_store();
+-  server_sock = init_listen_socket(5000);
++  kitsune_do_automigrate();
++  MIGRATE_LOCAL(server_sock);
++  MIGRATE_LOCAL(client_sock);
++
++  if (!kitsune_is_updating()) {
++    init_store();
++    server_sock = init_listen_socket(5000);
++  }
+   assert(server_sock > 0);
++
++  if (!kitsune_is_updating_from("client"))
++    handle_client(client_sock);
+   
+   while (1) {
+     kitsune_update("main");
+

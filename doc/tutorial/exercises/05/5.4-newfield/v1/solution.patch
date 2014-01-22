@@ -1,0 +1,13 @@
+=== modified file 'doc/tutorial/exercises/05/04-newfield/v1/keyvalueserver.xf'
+--- doc/tutorial/exercises/05/04-newfield/v1/keyvalueserver.xf	2012-09-12 22:07:04 +0000
++++ doc/tutorial/exercises/05/04-newfield/v1/keyvalueserver.xf	2012-09-12 22:12:44 +0000
+@@ -0,0 +1,8 @@
++{
++#include <time.h>
++}
++
++INIT struct tnode.entry_time: { 
++  $out = time(NULL); 
++  printf("Transformed %x\n", $base);
++}
+

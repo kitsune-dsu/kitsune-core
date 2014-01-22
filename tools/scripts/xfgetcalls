@@ -1,0 +1,35 @@
+#!/usr/bin/perl
+
+use warnings;
+use strict;
+
+
+open(XFORM, "<", "$ARGV[0]");
+my %functions;
+while (<XFORM>) {
+    if (/void (_kitsune_transform_[\w_]+)/) {
+	$functions{$1} = [];
+    }
+}
+
+seek(XFORM, 0, 0);
+
+my $active_function = "";
+while (<XFORM>) {
+    if (/void (_kitsune_transform_[\w_]+)/) {
+	$active_function = $1;
+    }
+    elsif (/(_kitsune_transform_[\w_]+)/) {
+	push($functions{$active_function}, $1);
+    }
+}
+
+foreach my $key (keys %functions) {
+    my $calls = $functions{$key};
+    print "$key,";
+    for my $call (@$calls) {
+	print "$call;";
+    }
+    print "\n"
+}
+
