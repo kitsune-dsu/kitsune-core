@@ -10,7 +10,7 @@ $(TESTS):
 	$(MAKE) -C $@ run-test
 
 ktcc-uint64:
-	../bin/ktcc ktcc-uint64.c
+	../bin/bin/ktcc ktcc-uint64.c
 
 clean: $(TESTS-CLEAN)
 

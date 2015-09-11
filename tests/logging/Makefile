@@ -7,7 +7,7 @@ all: $(TESTS) run-test
 .PHONY: logging run-test
 
 standalone:
-	gcc $(CFLAGS) $(EKINC) -o $@ $@.c  $(EKLIB)
+	gcc $(CFLAGS) $(EKINC) -o $@ $@.c  $(EKLIB) -ldl
 
 logging.so: logging.c
 	$(CC) $(CFLAGS_SHARED) $(EKINC) -o $@ $^ $(EKLIB)
