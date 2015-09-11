@@ -1,5 +1,5 @@
 
-TESTS =  argcargv logging updatetest ktcc-generics ktcc-autoxf ktcc-union
+TESTS =  argcargv logging updatetest ktcc-generics ktcc-autoxf ktcc-union ktcc-simplexf ktcc-automigrate ktcc-globalreg
 TESTS-CLEAN = $(foreach I,$(TESTS),$(I)-clean)
 
 .PHONY: $(TESTS) clean
