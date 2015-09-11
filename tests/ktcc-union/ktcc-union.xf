@@ -1,0 +1,3 @@
+struct _PreprocPostConfigFuncNode.unionfptr -> struct _PreprocPostConfigFuncNode.unionfptr : {XF_INVOKE(XF_FPTR(), &$in.fptr, &$out.fptr); }
+struct _PreprocPostConfigFuncNode.data -> struct _PreprocPostConfigFuncNode.data: {XF_ASSIGN($out, $in);}
+

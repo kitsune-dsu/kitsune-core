@@ -39,6 +39,7 @@ int main(int argc, char **argv)
     assert(l->data2 == (void *)123);
     assert(l->next == l);    
     assert(l2 == NULL);    
+    printf("Sucesss...\n");
   } else {
     kitsune_signal_update();    
     kitsune_set_next_version(strdup(argv[1]));
