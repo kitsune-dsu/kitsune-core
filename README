@@ -2,6 +2,12 @@
 Kitsune - Dynamic Updating System
 =================================
 
+Update
+------
+Tested with "The OCaml toplevel, version 4.00.1".
+Newer versions of Ocaml (ex: 4.02) might cause infinite loops with the code generator due to the version of Cil that we use.
+
+
 Getting Started
 ---------------
 
