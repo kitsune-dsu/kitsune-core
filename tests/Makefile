@@ -1,5 +1,5 @@
 
-TESTS =  addrtable argcargv logging transform updatetest ktcc-uint64
+TESTS =  argcargv logging transform updatetest ktcc-uint64
 TESTS-CLEAN = $(foreach I,$(TESTS),$(I)-clean)
 
 .PHONY: $(TESTS) clean
